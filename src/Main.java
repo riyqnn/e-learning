@@ -9,44 +9,17 @@ import ui.SplashScreen;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Starting application...");
-
         UserDAO userDAO = new UserDAO();
         
         try {
             SplashScreen splashScreen = new SplashScreen();
             splashScreen.setVisible(true);
-            
-            try {
-                Thread.sleep(5000); 
-                splashScreen.setVisible(false);
-                splashScreen.dispose(); 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            splashScreen.loadProgressBar(); 
         } catch (Exception e) {
             System.out.println("Error initializing SplashScreen: " + e.getMessage());
             e.printStackTrace();
-        }
-        
-        boolean isLoggedIn = false;
-        
-        if (isLoggedIn) {
-            try {
-                User currentUser = new User(); 
-                HomeScreen homeScreen = new HomeScreen(currentUser);
-                homeScreen.setVisible(true);
-            } catch (Exception e) {
-                System.out.println("Error initializing HomeScreen: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                LoginScreen loginScreen = new LoginScreen();
-                loginScreen.setVisible(true);
-            } catch (Exception e) {
-                System.out.println("Error initializing LoginScreen: " + e.getMessage());
-                e.printStackTrace();
-            }
+          
+            showLoginScreen();
         }
         
         try {
@@ -58,5 +31,15 @@ public class Main {
         }
         
         System.out.println("Application initialized.");
+    }
+    
+    private static void showLoginScreen() {
+        try {
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("Error initializing LoginScreen: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
